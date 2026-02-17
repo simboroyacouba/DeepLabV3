@@ -1,0 +1,5 @@
+# DEEPLAB outputs
+evaluation/
+output/
+*.pt
+*.pth
