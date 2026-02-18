@@ -24,6 +24,7 @@ from tqdm import tqdm
 import time
 from datetime import datetime, timedelta
 import random
+import yaml
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -32,20 +33,20 @@ warnings.filterwarnings('ignore')
 # CONFIGURATION (identique à Mask R-CNN)
 # =============================================================================
 
+def load_classes(yaml_path=None):
+    path = yaml_path or os.getenv("CLASSES_FILE", "classes.yaml")
+    with open(path, 'r', encoding='utf-8') as f:
+        return yaml.safe_load(f)['classes']
+
 CONFIG = {
     # Chemins (à adapter)
     "images_dir": os.getenv("SEGMENTATION_DATASET_IMAGES_DIR"),
     "annotations_file": os.getenv("SEGMENTATION_DATASET_ANNOTATIONS_FILE"),
+    "classes_file": os.getenv("CLASSES_FILE", "classes.yaml"),
     "output_dir": "./output",
     
     # Classes (dans l'ordre de CVAT) - IDENTIQUE à Mask R-CNN
-    "classes": [
-        "__background__",        # 0 - toujours en premier
-        "toiture_tole_ondulee",  # 1
-        "toiture_tole_bac",      # 2
-        "toiture_tuile",         # 3
-        "toiture_dalle"          # 4
-    ],
+    "classes": load_classes(), 
     
     # Modèle
     "backbone": "resnet50",  # resnet50 ou resnet101
