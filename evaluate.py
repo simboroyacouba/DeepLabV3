@@ -36,8 +36,8 @@ warnings.filterwarnings('ignore')
 
 CONFIG = {
     # Chemins
-    "images_dir": "C:/Users/NEBRATA/Desktop/Memoire/modeles/segmentation/dataset1/images/default",
-    "annotations_file": "C:/Users/NEBRATA/Desktop/Memoire/modeles/segmentation/dataset1/annotations/instances_default.json",
+    "images_dir":  os.getenv("SEGMENTATION_DATASET_IMAGES_DIR"),
+    "annotations_file": os.getenv("SEGMENTATION_DATASET_ANNOTATIONS_FILE"),
     "model_path": "./output/best_model.pth",
     "output_dir": "./evaluation",
     
